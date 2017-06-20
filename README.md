@@ -1,9 +1,9 @@
-##idea基于maven搭建ssm框架并实现一个简单显示用户表
-### 环境介绍
+## idea基于maven搭建ssm框架并实现一个简单显示用户表
+###  环境介绍
 搭建环境是mac上的idea,框架是springmvc,mybatis,spring.
-####Spring
+#### Spring
 简单来说，Spring是一个轻量级的控制反转（IoC）和面向切面（AOP）的容器框架。通过这个框架我们可以实现代码之间的解耦,其中我感觉最为方便的是我们可以通过注解的方式取代编写大量的bean,解放生产力.
-####Spring-mvc
+#### Spring-mvc
 我认为 spring-mvc其实是Spring框架的一部分,他在整个工程的位置是在view层,其中最为简单的模式大概是
 	
 * 用户发起request请求至控制器(Controller)控制接收用户请求的数据，委托给模型进行处理.
@@ -12,7 +12,7 @@
 * 控制器将模型数据在视图(View)中展示web中模型无法将数据直接在视图上显示，需要通过控制器完成。如果在C/S应用中模型是可以将数据在视图中展示的。
 * 控制器将视图response响应给用户通过视图展示给用户要的数据或处理结果。
 
-####流程大概是这样的
+#### 流程大概是这样的
 * 用户发送请求至前端控制器**DispatcherServlet**.
 * **DispatcherServlet**收到请求调用**HandlerMapping**处理器映射器.
 * 处理器映射器找到具体的处理器，生成处理器对象及处理器拦截器(如果有则生成)一并返回DispatcherServlet.
@@ -30,8 +30,8 @@
 mybatis主要是用于处理数据库映射到对象的这个过程,是一款一流的支持自定义SQL、存储过程和高级映射的持久化框架。MyBatis几乎消除了所有的JDBC代码,MyBatis能够使用简单的XML格式或者注解进行来配置，能够映射基本数据元素、Map接口和POJOs（普通java对象）到数据库中的记录。
 
 ------------------------
-###环境配置
-####创建maven工程
+### 环境配置
+#### 创建maven工程
 首先我们需要下载一个idea,然后创建一个maven工程
 
 * File -> New project，进入创建项目窗口，选择Maven项目。 
@@ -42,12 +42,12 @@ mybatis主要是用于处理数据库映射到对象的这个过程,是一款一
 
 ![maven图](http://upload-images.jianshu.io/upload_images/5229437-fd5e0f3f7df410c9.png?imageMogr2/auto-orient/strip%7CimageView2/2)
 ![maven图2](http://upload-images.jianshu.io/upload_images/5229437-2396f2ded886651a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-####二.将工程文件补全
+#### 二.将工程文件补全
 其中java需要设置为代码的根目录,我们需要右键java文件夹,然后点击**Mark Directory As选项为Sources Root**
 ![工程图](http://img.blog.csdn.net/20160717142542722?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
-###三.文件配置
+### 三.文件配置
 因为我们使用的是maven来引入项目所需要的jar包，所以也就不需要手动来管理jar包了。我们只需要将代码复制进对应的文件的就好了.  
-#####'pom.xml'
+##### 'pom.xml'
 ```html
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">  
@@ -278,7 +278,7 @@ minIdle=1
 maxWait=60000  
 ```
 需要注意的是其中的**username**应该是你的**连接sql用户名**,**password**是你**连接数据库的密码**.**jdbcURL中的db_ssm**应该取代为你想要连接到的数据库名.最为重要的就是其中jdbcURL的最后不能接**空格**等其他符号!!!
-####log4j.properties
+#### log4j.properties
 ```html
 log4j.rootLogger=INFO,Console,File  
   
@@ -356,7 +356,7 @@ log4j.appender.File.layout.ConversionPattern=[%p][%t][%d{yyyy-MM-dd HH\:mm\:ss}]
     <context:component-scan base-package="com.heitian.ssm.controller"/> 
 ```
 这里面的**com.heitian.ssm.controller**应该是自己项目中对应的controller层
-####web.xml
+#### web.xml
 ```html
 <?xml version="1.0" encoding="UTF-8"?>  
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"  
@@ -432,7 +432,7 @@ log4j.appender.File.layout.ConversionPattern=[%p][%t][%d{yyyy-MM-dd HH\:mm\:ss}]
 ```
 然后就是编写一些业务代码并映射到数据库了.具体的可以下载我已经配置好的项目进行参考
 最后就是将这个部署到Tomcat上
-#####部署和发布
+##### 部署和发布
  File -> Project Structure，进入创建项目配置窗口。创建一个Tomcat容器实例，并把项目部署进去
  ![部署图](http://img.blog.csdn.net/20160718220320553?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
  项目所需配置好项目访问的根路径，然后启动Tomcat。
